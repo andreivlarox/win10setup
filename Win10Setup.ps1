@@ -1,14 +1,19 @@
-echo ##     ## ##          ###    ########   #######  ##     ## 
-echo ##     ## ##         ## ##   ##     ## ##     ##  ##   ##  
-echo ##     ## ##        ##   ##  ##     ## ##     ##   ## ##   
-echo ##     ## ##       ##     ## ########  ##     ##    ###    
-echo  ##   ##  ##       ######### ##   ##   ##     ##   ## ##   
-echo   ## ##   ##       ##     ## ##    ##  ##     ##  ##   ##  
-echo    ###    ######## ##     ## ##     ##  #######  ##     ## 
-echo
-echo                             Script instalare si configurare
-echo                             rapida. Andrei/VLAROX FISCAL SRL 2019
-
+Write-Host ""
+Write-Host ""
+Write-Host "+-------------------------------------------------------------+"
+Write-Host "| ##     ## ##          ###    ########   #######  ##     ##  |"
+Write-Host "| ##     ## ##         ## ##   ##     ## ##     ##  ##   ##   |"
+Write-Host "| ##     ## ##        ##   ##  ##     ## ##     ##   ## ##    |"
+Write-Host "| ##     ## ##       ##     ## ########  ##     ##    ###     |"
+Write-Host "|  ##   ##  ##       ######### ##   ##   ##     ##   ## ##    |"
+Write-Host "|   ## ##   ##       ##     ## ##    ##  ##     ##  ##   ##   |"
+Write-Host "|    ###    ######## ##     ## ##     ##  #######  ##     ##  |"
+Write-Host "|                                                             |"
+Write-Host "|                      Script instalare si configurare rapida |"
+Write-Host "|                               Andrei/VLAROX FISCAL SRL 2021 |"
+Write-Host "+-------------------------------------------------------------+"
+Write-Host ""
+Write-Host ""
 Write-Host "Setare nume PC"
 $numepc = Read-Host 'Nume PC'
 Rename-Computer -NewName $numepc -LocalCredential Administrator
@@ -385,24 +390,27 @@ Write-Host "Oprire Windows Updates"
 & "$PSScriptRoot\Wub\Wub.exe" /D /P
 Copy-Item -Path "$PSScriptRoot\Wub" -Destination "C:\Wub" -Recurse
 
-
-
-echo ##     ## ##          ###    ########   #######  ##     ## 
-echo ##     ## ##         ## ##   ##     ## ##     ##  ##   ##  
-echo ##     ## ##        ##   ##  ##     ## ##     ##   ## ##   
-echo ##     ## ##       ##     ## ########  ##     ##    ###    
-echo  ##   ##  ##       ######### ##   ##   ##     ##   ## ##   
-echo   ## ##   ##       ##     ## ##    ##  ##     ##  ##   ##  
-echo    ###    ######## ##     ## ##     ##  #######  ##     ## 
-echo
-echo                             Script instalare si configurare
-echo                             rapida. Andrei/VLAROX FISCAL SRL 2019
-
+Write-Host ""
+Write-Host ""
+Write-Host "+-------------------------------------------------------------+"
+Write-Host "| ##     ## ##          ###    ########   #######  ##     ##  |"
+Write-Host "| ##     ## ##         ## ##   ##     ## ##     ##  ##   ##   |"
+Write-Host "| ##     ## ##        ##   ##  ##     ## ##     ##   ## ##    |"
+Write-Host "| ##     ## ##       ##     ## ########  ##     ##    ###     |"
+Write-Host "|  ##   ##  ##       ######### ##   ##   ##     ##   ## ##    |"
+Write-Host "|   ## ##   ##       ##     ## ##    ##  ##     ##  ##   ##   |"
+Write-Host "|    ###    ######## ##     ## ##     ##  #######  ##     ##  |"
+Write-Host "|                                                             |"
+Write-Host "|                      Script instalare si configurare rapida |"
+Write-Host "|                               Andrei/VLAROX FISCAL SRL 2021 |"
+Write-Host "+-------------------------------------------------------------+"
+Write-Host ""
+Write-Host ""
 
 Copy-Item -Path "$PSScriptRoot\remove.bat" -Destination "$env:USERPROFILE\Desktop\remove.bat"
 
 Write-Host "Verificare conexiune router!"
-ping &DG
+ping $DG
 Write-Host "Verificare conexiune internet!"
 ping 1.1.1.1
 ping google.com
