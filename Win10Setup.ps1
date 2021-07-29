@@ -26,7 +26,7 @@ $no = New-Object System.Management.Automation.Host.ChoiceDescription "&Nu", $nod
 $options = [System.Management.Automation.Host.ChoiceDescription[]]($yes, $no)
 $title = "Setare IP"
 $message = "Vrei sa setam IP-ul calculatorului?"
-$result = $host.ui.PromptForChoice($title, $message, $options, 0)
+$result = $host.ui.PromptForChoice($title, $message, $options, 1)
 switch ($result) {
   0{
     $IP = Read-Host -Prompt "Introduceti IP-ul (192.168.XXX.XXX)"
@@ -66,6 +66,7 @@ switch ($result) {
 
 
 Write-Host "Checking winget..."
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowAllTrustedApps" /d "1"
 
 Try{
 	# Check if winget is already installed
