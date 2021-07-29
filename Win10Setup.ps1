@@ -77,6 +77,14 @@ Catch{
 	# winget is not installed. Install it from the Github release
 	Write-Host "winget is not found, installing it right now."
 	
+	Import-Module Appx
+	$downloadvc = "https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx"
+	$outputvc = $PSScriptRoot + "\vclibs.appx"
+	Invoke-WebRequest -Uri $downloadvc -OutFile $outputvc
+	
+	Write-Host "Installing the package"
+	Add-AppxPackage -Path $outputvc
+	
 	$download = "https://github.com/microsoft/winget-cli/releases/download/v1.0.11692/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
 	$output = $PSScriptRoot + "\winget-latest.appxbundle"
 	Write-Host "Dowloading latest release"
