@@ -177,7 +177,7 @@ $no = New-Object System.Management.Automation.Host.ChoiceDescription "&Nu", $nod
 $options = [System.Management.Automation.Host.ChoiceDescription[]]($yes, $no)
 $title = "Folder Scales"
 $message = "Vrei sa copiem folderul scales?"
-$result = $host.ui.PromptForChoice($title, $message, $options, 0)
+$result = $host.ui.PromptForChoice($title, $message, $options, 1)
 switch ($result) {
   0{
     Copy-Item -Path "$PSScriptRoot\scales" -Destination "C:\scales" -Recurse
@@ -197,7 +197,7 @@ $no = New-Object System.Management.Automation.Host.ChoiceDescription "&Nu", $nod
 $options = [System.Management.Automation.Host.ChoiceDescription[]]($yes, $no)
 $title = "Teamviewer 13"
 $message = "Vrei sa instalam TeamViewer 13?"
-$result = $host.ui.PromptForChoice($title, $message, $options, 0)
+$result = $host.ui.PromptForChoice($title, $message, $options, 1)
 switch ($result) {
   0{
     & "$PSScriptRoot\teamviewer13_HOST.exe" /S /norestart | Out-Null
