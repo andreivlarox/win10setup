@@ -64,6 +64,8 @@ switch ($result) {
    }
 }
 
+Write-Host "Se porneste network discovery..."
+netsh advfirewall firewall set rule group=”network discovery” new enable=yes
 
 Write-Host "Checking winget..."
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowAllTrustedApps" /d "1"
@@ -263,10 +265,13 @@ Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name "sShortTime" -V
 Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name "sLongTime" -Value "HH:mm:SS"
 Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name "sShortDate" -Value "dd.MM.yyyy"
 Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name "sLongDate" -Value "dddd, dd MMMM, yyyy"
-Set-ItemProperty -Path "HKCU:\Software\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -Type DWord -Value 1
-Set-ItemProperty -Path "HKCU:\Software\Policies\Microsoft\CurrentVersion\PushNotifications" -Name "ToastEnabled" -Type DWord -Value 0
+If (!(Test-Path "HKCU:\Software\Policies\Microsoft\Windows\Explorer")) {
+    New-Item -Path "HKCU:\Software\Policies\Microsoft\Windows\Explorer" -Force | Out-Null
+}
 Set-ItemProperty -Path "HKCU:\Software\Policies\Microsoft\Windows\Explorer" -Name "NoNewAppAlert" -Type DWord -Value 1
-New-Item -Path "HKLM:\Software\Policies\Microsoft\Windows NT\DNSClient"
+If (!(Test-Path "HKLM:\Software\Policies\Microsoft\Windows NT\DNSClient")) {
+    New-Item -Path "HKLM:\Software\Policies\Microsoft\Windows NT\DNSClient" -Force | Out-Null
+}
 Set-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -Name "EnableLUA" -Type DWord -Value 0
 
 
@@ -320,6 +325,9 @@ If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAcces
 }
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" -Name "Value" -Type String -Value "Deny"
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Overrides\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}" -Name "SensorPermissionState" -Type DWord -Value 0
+If (!(Test-Path "HKLM:\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration")) {
+    New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration" -Force | Out-Null
+}
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration" -Name "Status" -Type DWord -Value 0
 Set-ItemProperty -Path "HKLM:\SYSTEM\Maps" -Name "AutoUpdateEnabled" -Type DWord -Value 0
 If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Siuf\Rules")) {
@@ -345,7 +353,7 @@ Stop-Service "DiagTrack" -WarningAction SilentlyContinue
 Set-Service "DiagTrack" -StartupType Disabled
 bcdedit /set `{current`} bootmenupolicy Legacy | Out-Null
 
-Write-Host "Se dezactiveaza serviciu de hibernare..."
+Write-Host "Se dezactiveaza serviciul de hibernare..."
 Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Session Manager\Power" -Name "HibernteEnabled" -Type Dword -Value 0
 If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings")) {
     New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" | Out-Null
@@ -367,6 +375,9 @@ If (!([System.Windows.Forms.Control]::IsKeyLocked('NumLock'))) {
     $wsh.SendKeys('{NUMLOCK}')
 }
 
+If (!(Test-Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds")) {
+    New-Item -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" | Out-Null
+}
 Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" -Name "EnableFeeds" -Type DWord -Value 0
 
 Write-Host "Se dezactiveaza OneDrive..."
