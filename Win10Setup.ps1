@@ -18,6 +18,16 @@ Write-Host "Setare nume PC"
 $numepc = Read-Host 'Nume PC'
 Rename-Computer -NewName $numepc -LocalCredential Administrator
 
+## Data Ora
+Write-Host "Se seteaza data si ora"
+TZUTIL /s "GTB Standard Time"
+Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name "sShortTime" -Value "HH:mm"
+Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name "sLongTime" -Value "HH:mm:SS"
+Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name "sShortDate" -Value "dd.MM.yyyy"
+Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name "sLongDate" -Value "dddd, dd MMMM, yyyy"
+net start w32time
+w32tm /resync /force
+
 ## Setare IP
 $yesdescription = "Seteaza IP-ul calculatorului"
 $nodescription = "Sarim peste setarea IP-ului"
@@ -259,12 +269,8 @@ powercfg /change hibernate-timeout-dc 0
 powercfg /change disk-timeout-ac 0
 powercfg /change disk-timeout-dc 0
 
-Write-Host "Setare timezone si format ora/data. Dezactivare notificari. Dezactivare UAC"
-TZUTIL /s "GTB Standard Time"
-Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name "sShortTime" -Value "HH:mm"
-Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name "sLongTime" -Value "HH:mm:SS"
-Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name "sShortDate" -Value "dd.MM.yyyy"
-Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name "sLongDate" -Value "dddd, dd MMMM, yyyy"
+Write-Host "Dezactivare notificari. Dezactivare UAC"
+
 If (!(Test-Path "HKCU:\Software\Policies\Microsoft\Windows\Explorer")) {
     New-Item -Path "HKCU:\Software\Policies\Microsoft\Windows\Explorer" -Force | Out-Null
 }
