@@ -180,6 +180,60 @@ winget install AnyDeskSoftwareGmbH.AnyDesk
 if($?) { Write-Host "Anydesk instalat!" }
 cmd /C "echo Vlarox2014 | `"C:\Program Files (x86)\AnyDesk\anydesk.exe`" --set-password"
 
+## Remotely
+$yesdescription = "Instaleaza Remotely"
+$nodescription = "Sarim peste instalarea Remotely"
+$yes = New-Object System.Management.Automation.Host.ChoiceDescription "&Da", $yesdescription
+$no = New-Object System.Management.Automation.Host.ChoiceDescription "&Nu", $nodescription
+$options = [System.Management.Automation.Host.ChoiceDescription[]]($yes, $no)
+$title = "Remotely"
+$message = "Vrei sa instalam remotely?"
+$result = $host.ui.PromptForChoice($title, $message, $options, 1)
+switch ($result) {
+  0{
+  	$pcname = Read-Host 'Introduceti alias-ul (numele) calculatorului: '
+   	 ## Grup clienti
+	$clientdescription = "Clienti"
+	$abadescription = "Aba Flor"
+	$interndescription = "Intern"
+	$client = New-Object System.Management.Automation.Host.ChoiceDescription "&Client", $clientdescription
+	$aba = New-Object System.Management.Automation.Host.ChoiceDescription "&Aba Flor", $abadescription
+	$intern = New-Object System.Management.Automation.Host.ChoiceDescription "&Intern", $interndescription
+	$options = [System.Management.Automation.Host.ChoiceDescription[]]($client, $aba, $intern)
+	$title = "Grup Client"
+	$message = "In ce grup adaugam pc-ul?"
+	$result = $host.ui.PromptForChoice($title, $message, $options, 0)
+	switch ($result) {
+  	0{
+   	 $grup = "Clienti"
+ 	 }
+ 	 1{
+   	 $grup = "Aba Flor"
+  	 }
+	 2{
+	 $grup = "Intern"
+	 }
+	}
+	
+	$path = "C:\Remotely"
+	If(!(test-path $path))
+	{
+       New-Item -ItemType Directory -Force -Path $path
+	}
+	Copy-Item -Path "$PSScriptRoot\Remotely_Install.exe" -Destination "C:\Remotely\Remotely_Install.exe"
+	cmd.exe /c "start /wait C:\Remotely\Remotely_Install.exe -install -quiet -organizationid "50a754e7-e194-436e-8887-677f19059382" -serverurl "https://remote.vlarox.ro" -devicegroup "$grup" -devicealias "$pcname""
+
+		If((test-path $path))
+	{
+       Remove-Item -Recurse -Force -Path $path -ErrorAction SilentlyContinue
+	}
+	
+	  }
+  1{
+    Write-Host "Sarit peste Instalarea Remotely"
+   }
+}
+
 
 ## Folder scales
 $yesdescription = "Copiaza folderul scales"
