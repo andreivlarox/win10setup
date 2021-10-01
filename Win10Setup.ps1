@@ -77,6 +77,11 @@ switch ($result) {
 Write-Host "Se porneste network discovery..."
 netsh advfirewall firewall set rule group=”network discovery” new enable=yes
 
+# Instalare net framework 3.5
+
+Write-Host "Instalare .netFramework 3.5"
+& "$PSScriptRoot\dotnetfx35.exe" | Out-Null
+
 Write-Host "Checking winget..."
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowAllTrustedApps" /d "1"
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevLicense" /d "1"
@@ -112,7 +117,7 @@ Catch{
 # Instalare Windows Terminal
 
 Write-Host "Se instaleaza New Windows Terminal"
-winget install Microsoft.WindowsTerminal
+winget install --id Microsoft.WindowsTerminal --accept-package-agreements
 if($?) { Write-Host "New Windows Terminal instalat!" }
 
 if ($isPreview)
@@ -137,10 +142,6 @@ if (Test-Path $file) {
 Write-Host "Windows Terminal installed to Windows Explorer context menu."
 Write-Host "Settings file downloaded and imported from Github."
 
-# Instalare net framework 3.5
-
-Write-Host "Instalare .netFramework 3.5"
-& "$PSScriptRoot\dotnetfx35.exe" | Out-Null
 
 # Instalare Dude
 
@@ -151,32 +152,32 @@ Write-Host "Instalare Dude"
 # Instalare Firefox
 
 Write-Host "Se instaleaza Firefox"
-winget install Mozilla.Firefox
+winget install --id Mozilla.Firefox --accept-package-agreements
 if($?) { Write-Host "Firefox instalat!" }
 cmd /C "$PSScriptRoot\SetDefaultBrowser.exe HKLM Firefox-308046B0AF4A39CB"
 
 # Instalare Adobe Reader
 
 Write-Host "Se instaleaza Adobe Reader DC"
-winget install Adobe.AdobeAcrobatReaderDC
+winget install --id Adobe.AdobeAcrobatReaderDC --accept-package-agreements
 if($?) { Write-Host "Adobe Reader DC instalat!" }
 
 # Instalare WinRAR
 
 Write-Host "Se instaleaza WinRAR"
-winget install RARLab.WinRAR
+winget install --id RARLab.WinRAR --accept-package-agreements
 if($?) { Write-Host "WinRAR instalat!" }
 
 # Instalare Notepad++
 
 Write-Host "Se instaleaza Notepad++"
-winget install Notepad++.Notepad++
+winget install --id Notepad++.Notepad++
 if($?) { Write-Host "Notepad++ instalat!" }
 
 # Instalare Anydesk
 
 Write-Host "Se instaleaza Anydesk"
-winget install AnyDeskSoftwareGmbH.AnyDesk
+winget install --id AnyDeskSoftwareGmbH.AnyDesk --accept-package-agreements
 if($?) { Write-Host "Anydesk instalat!" }
 cmd /C "echo Vlarox2014 | `"C:\Program Files (x86)\AnyDesk\anydesk.exe`" --set-password"
 
@@ -286,7 +287,7 @@ $message = "Vrei sa instalam LibreOffice?"
 $result = $host.ui.PromptForChoice($title, $message, $options, 0)
 switch ($result) {
   0{
-    winget install LibreOffice.LibreOffice
+    winget install --id LibreOffice.LibreOffice --accept-package-agreements
     if($?) { Write-Host "LibreOffice instalat!" }
   }
   1{
