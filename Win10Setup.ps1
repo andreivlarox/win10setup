@@ -117,7 +117,7 @@ Catch{
 # Instalare Windows Terminal
 
 Write-Host "Se instaleaza New Windows Terminal"
-winget install --id Microsoft.WindowsTerminal --accept-package-agreements
+winget install --id Microsoft.WindowsTerminal
 if($?) { Write-Host "New Windows Terminal instalat!" }
 
 if ($isPreview)
@@ -152,20 +152,20 @@ Write-Host "Instalare Dude"
 # Instalare Firefox
 
 Write-Host "Se instaleaza Firefox"
-winget install --id Mozilla.Firefox --accept-package-agreements
+winget install --id Mozilla.Firefox
 if($?) { Write-Host "Firefox instalat!" }
 cmd /C "$PSScriptRoot\SetDefaultBrowser.exe HKLM Firefox-308046B0AF4A39CB"
 
 # Instalare Adobe Reader
 
 Write-Host "Se instaleaza Adobe Reader DC"
-winget install --id Adobe.AdobeAcrobatReaderDC --accept-package-agreements
+winget install --id Adobe.AdobeAcrobatReaderDC
 if($?) { Write-Host "Adobe Reader DC instalat!" }
 
 # Instalare WinRAR
 
 Write-Host "Se instaleaza WinRAR"
-winget install --id RARLab.WinRAR --accept-package-agreements
+winget install --id RARLab.WinRAR
 if($?) { Write-Host "WinRAR instalat!" }
 
 # Instalare Notepad++
@@ -177,7 +177,7 @@ if($?) { Write-Host "Notepad++ instalat!" }
 # Instalare Anydesk
 
 Write-Host "Se instaleaza Anydesk"
-winget install --id AnyDeskSoftwareGmbH.AnyDesk --accept-package-agreements
+winget install --id AnyDeskSoftwareGmbH.AnyDesk
 if($?) { Write-Host "Anydesk instalat!" }
 cmd /C "echo Vlarox2014 | `"C:\Program Files (x86)\AnyDesk\anydesk.exe`" --set-password"
 
@@ -287,7 +287,7 @@ $message = "Vrei sa instalam LibreOffice?"
 $result = $host.ui.PromptForChoice($title, $message, $options, 0)
 switch ($result) {
   0{
-    winget install --id LibreOffice.LibreOffice --accept-package-agreements
+    winget install --id LibreOffice.LibreOffice
     if($?) { Write-Host "LibreOffice instalat!" }
   }
   1{
