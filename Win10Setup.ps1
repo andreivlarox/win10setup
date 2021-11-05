@@ -104,7 +104,7 @@ Catch{
 	Write-Host "Installing the package"
 	Add-AppxPackage -Path $outputvc
 	
-	$download = "https://github.com/microsoft/winget-cli/releases/download/v1.0.11692/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
+	$download = "https://github.com/microsoft/winget-cli/releases/download/v1.1.12653/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
 	$output = $PSScriptRoot + "\winget-latest.appxbundle"
 	Write-Host "Dowloading latest release"
 	Invoke-WebRequest -Uri $download -OutFile $output
