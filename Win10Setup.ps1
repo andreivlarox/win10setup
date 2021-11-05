@@ -159,7 +159,7 @@ cmd /C "$PSScriptRoot\SetDefaultBrowser.exe HKLM Firefox-308046B0AF4A39CB"
 # Instalare Adobe Reader
 
 Write-Host "Se instaleaza Adobe Reader DC"
-winget install --id Adobe.AdobeAcrobatReaderDC
+winget install --id Adobe.Acrobat.Reader.64-bit
 if($?) { Write-Host "Adobe Reader DC instalat!" }
 
 # Instalare WinRAR
