@@ -490,6 +490,7 @@ Write-Host ""
 Write-Host ""
 
 Copy-Item -Path "$PSScriptRoot\remove.bat" -Destination "$env:USERPROFILE\Desktop\remove.bat"
+Remove-Item -Path "$PSScriptRoot\current.txt"
 
 Write-Host "Verificare conexiune router!"
 ping $DG
